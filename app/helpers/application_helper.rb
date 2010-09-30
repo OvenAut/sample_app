@@ -5,4 +5,7 @@ module ApplicationHelper
     base_title if @title.nil?
     "#{base_title} | #{@title}"
   end
+  def logo
+    image_tag("rails.png", :alt=>"Sample App", :class=>"round")
+  end
 end
