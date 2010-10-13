@@ -39,19 +39,26 @@ Spork.prefork do
   ActiveSupport::Dependencies.clear
   
   end
-  def test_sign_in(user)
-    controller.current_user = user
+  def integration_sign_in(user)
+    visit signin_path
+    fill_in :email, :with => user.email
+    fill_in :password, :with => user.password
+    click_button
   end
-  
 end
 
 Spork.each_run do
   # This code will be run each time you run your specs.
   
 end
+def test_sign_in(user)
+  @current_user = user
+end
+
+
 
 # --- Instructions ---
-# - Sort through your spec_helper file. Place as much environment loading 
+# - Sort through y spec_helper file. Place as much environment loading 
 #   code that you don't normally modify during development in the 
 #   Spork.prefork block.
 # - Place the rest under Spork.each_run block
