@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
-  before_filter :authenticate, :only => [:update, :edit]
+  before_filter :authenticate, :only => [:index, :update, :edit, :destroy]
   before_filter :correct_user, :only => [:update, :edit]
+  
+  def index
+    @title = "All users"
+    @user = User.all
+  end
   
   def show
     @user = User.find(params[:id])

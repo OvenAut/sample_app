@@ -71,3 +71,9 @@ margin: -7px; background-color: #c00; color: #fff;
 #error_explanation p { color: #333; margin-bottom: 0; padding: 5px;
 } 
 #error_explanation ul li { font-size: 12px; list-style:square; }
+ul.users {
+	margin-top: 1em;
+}
+ul.users li {
+	list-style: none;
+}

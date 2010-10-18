@@ -37,6 +37,9 @@ Spork.prefork do
   # Emulate initializer set_clear_dependencies_hook in 
   # railties/lib/rails/application/bootstrap.rb 
   ActiveSupport::Dependencies.clear
+  def test_sign_in(user)
+    controller.current_user = user
+  end
   
   end
   def integration_sign_in(user)
@@ -50,9 +53,6 @@ end
 Spork.each_run do
   # This code will be run each time you run your specs.
   
-end
-def test_sign_in(user)
-  @current_user = user
 end
 
 
