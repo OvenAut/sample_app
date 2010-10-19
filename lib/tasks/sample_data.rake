@@ -4,10 +4,11 @@ namespace :db do |variable|
   desc "Fill database with sapmle data"
   task :populate => :environment do
     Rake::Task['db:reset'].invoke
-    User.create!(:name => "Exapmle User",
+    admin = User.create!(:name => "Exapmle User",
     :email => "example@railstutorial.org",
     :password => "foobar",
-    :password_confiramtion => "foobar"   )
+    :password_confiramtion => "foobar")
+    admin.toggle!(:admin)
   99.times do |n|
     name = Faker::Name.name
     email = "example-#{n+1}@railstutorial.org"

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101002203721
+# Schema version: 20101019010804
 #
 # Table name: users
 #
@@ -10,11 +10,12 @@
 #  updated_at         :datetime
 #  encrypted_password :string(255)
 #  salt               :string(255)
+#  admin              :boolean
 #
 
 class User < ActiveRecord::Base
   attr_accessor :password
-  attr_accessible :name, :email, :password, :password_comfirmation
+  attr_accessible :name, :email, :password, :password_comfirmation, :admin
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i #regular expression
   
