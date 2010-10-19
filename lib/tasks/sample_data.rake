@@ -16,7 +16,7 @@ namespace :db do |variable|
     User.create!(:name => name,
                   :email => email,
                   :password => password,
-                  :password_confiramtion => password,  )
+                  :password_confiramtion => password)
   end
   end
 end
