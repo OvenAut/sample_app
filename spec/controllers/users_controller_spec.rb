@@ -54,7 +54,6 @@ describe UsersController do
         response.should_not have_selector('a', :href => user_path(other_user),
                                             :content => "delete", )
       end
-
     end
     
   end
@@ -86,8 +85,15 @@ describe UsersController do
       get :new
       response.should have_selector("input [name='user[password_confirmation]'][type='password']")
     end
-    
-    
+    describe "for signed_in user" do
+      before(:each) do
+      @user = controller.sign_in(Factory(:user))
+      end
+    it "should have no acces to new User" do
+      get :new
+      response.should_not be_success
+    end
+  end
   end
 
 
@@ -148,7 +154,16 @@ describe UsersController do
         response.should render_template('new')
       end
     end
-    
+      describe "for signed_in user" do
+        before(:each) do
+        @user = controller.sign_in(Factory(:user))
+        end
+      it "should have no acces to create User" do
+        post :create
+        response.should_not be_success
+      end
+    end
+
     describe "success" do
       
       before(:each) do
@@ -291,6 +306,10 @@ describe UsersController do
         delete :destroy, :id => @user
         response.should redirect_to(root_path)
       end
+      it "should dont see DELETE" do
+        get :index, :id=> @user
+        response.should_not have_selector("a", :content=>"delete") 
+      end
     end
     describe "as a admin user" do
       before(:each) do
@@ -307,6 +326,10 @@ describe UsersController do
         delete :destroy, :id => @user
         flash[:success].should =~ /destroyed/i
         response.should redirect_to(users_path) 
+      end
+      it "should see DELETE" do
+        get :index, :id=> @admin
+        response.should have_selector("a", :content=>"delete") 
       end
       
       it "should not be able to destroy itself" do

@@ -13,12 +13,14 @@ class UsersController < ApplicationController
   end
   
   def new
+    redirect_to(root_path, :notice => "You alredy Sign in") unless current_user?(@user)
     @user = User.new
     @title = "Sign up"
   end
   def create
+    redirect_to(root_path, :notice => "You alredy Sihn up") and return unless current_user?(@user)
     @user = User.new(params[:user])
-    if @user.save
+    if @user.save 
       sign_in @user
       flash[:success] = "Welcome to the Sample App!"
       redirect_to @user
