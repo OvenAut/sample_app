@@ -96,8 +96,6 @@ describe UsersController do
   end
   end
 
-
-
   describe "GET 'show'" do
     
     before(:each) do
@@ -233,6 +231,7 @@ describe UsersController do
       response.should have_selector("a", :href=> gravatar_url, :content => "change")
     end
   end
+
   describe "PUT 'update" do
     before(:each) do
       @user = Factory(:user)
@@ -273,6 +272,7 @@ describe UsersController do
       end
     end
   end
+
   describe "authentication of edit update page" do
     before(:each) do
       @user = Factory(:user)
@@ -306,6 +306,7 @@ describe UsersController do
       end
     end
   end    
+
   describe "DELETE 'destroy" do
     before(:each) do
       @user = Factory(:user)
@@ -356,4 +357,5 @@ describe UsersController do
       end
     end
   end
+
 end
