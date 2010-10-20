@@ -1,9 +1,11 @@
 <%= form_for(@micropost) do |f| %>
 		<%= render 'shared/error_messages', :object => f.object %>
+
 	<div class="field">
-		<%= f.text_area :content %>
+		<%= f.text_area :content, :onkeyup => "limiter()" %>
 	</div>
-	<div class="action">
+	<span class="action">
 		<%= f.submit "Submit" %>
-	</div>
+	</span>
+			<span>Character left: </span><span id="counter">140</span>
 <% end %>
