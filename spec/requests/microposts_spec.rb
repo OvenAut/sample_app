@@ -29,13 +29,16 @@ describe "Microposts" do
         content = "Lorem ipsum dolot sit omet"
         lambda do
           visit root_path
+          response.should have_selector "span.microposts", :content =>  "0 micropost"
           fill_in :micropost_content, :with => content
           click_button
           response.should have_selector('span.content', :content => content)
         end.should change(Micropost, :count).by(1)
+        response.should have_selector "span.microposts", :content =>  "1 micropost"
       end
     end
 
   end
 
 end
+#<%= pluralize(0, "micropost") %>
