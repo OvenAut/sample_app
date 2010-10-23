@@ -46,6 +46,8 @@ class User < ActiveRecord::Base
   
   before_save :encrypt_password
   
+  
+  
   #Reurn true if the user´s password matches the submitted password.
   def has_password? (submitted_password)
     # Compare encrypted_password with the encrypted version of
@@ -54,7 +56,7 @@ class User < ActiveRecord::Base
   end
   
   def feed
-    Micropost.where("user_id = ?", id)
+    Micropost.from_users_followed_by(self)
   end
   
   def following?(followed)
