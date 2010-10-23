@@ -2,7 +2,7 @@ SampleApp::Application.routes.draw do
   get "sessions/new"
 
   resources :users do
-      get :microposts
+    resources :microposts
     member do
       get :following, :followers
     end
