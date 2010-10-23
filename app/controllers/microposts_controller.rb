@@ -17,6 +17,12 @@ class MicropostsController < ApplicationController
    redirect_to root_path, :flash => { :success => "Micropost deleted!" } 
   end
   
+  def index
+    @user = User.find(params[:user_id])
+    @microposts = @user.microposts.paginate(:page => params[:page])
+    @title = @user.name
+    #redirect_to user_path(params[:user_id])
+  end
   private
   
   def authorized_user
